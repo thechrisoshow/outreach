@@ -1,4 +1,3 @@
-
 module Outreach
   class Prospect
     attr_accessor :first_name, :last_name, :company, :contact, :tags
@@ -12,6 +11,7 @@ module Outreach
     end
 
     private
+
     def to_ostruct(hash)
       o = OpenStruct.new(hash)
       hash.each.with_object(o) do |(k,v), o|
@@ -34,26 +34,24 @@ module Outreach
     end
 
     def all(attrs={})
-      # query by email
-      response = @request.get(API_URL, filters(attrs))
+      response = @request.get(API_URL, attribute_mapping(attrs))
       response['data'].map {|attrs| Prospect.new(attrs)}
     end
 
     private
 
-    def filters(attrs)
-      result = {}
+    def attribute_mapping(attrs)
       if attrs[:first_name]
-        result["filter[personal/name/first]"] = attrs[:first_name]
+        attrs["filter[personal/name/first]"] = attrs.delete(:first_name)
       end
       if attrs[:last_name]
-        result["filter[personal/name/last]"] = attrs[:last_name]
+        attrs["filter[personal/name/last]"] = attrs.delete(:last_name)
       end
-      result["filter[contact/email]"] = attrs[:email] if attrs[:email]
+      attrs["filter[contact/email]"] = attrs.delete(:email) if attrs[:email]
       if attrs[:company_name]
-        result["filter[company/name]"] = attrs[:company_name]
+        attrs["filter[company/name]"] = attrs.delete(company_name)
       end
-      result
+      attrs
     end
   end
 end

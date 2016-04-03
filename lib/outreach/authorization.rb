@@ -34,5 +34,17 @@ module Outreach
       response = Request.new.post(API_URL, params)
       new(response)
     end
+
+    def self.refresh(refresh_token)
+      params = {
+        client_id:     Outreach.application_identifier,
+        client_secret: Outreach.application_secret,
+        redirect_uri:  Outreach.redirect_uri,
+        grant_type:    'refresh_token',
+        refresh_token: refresh_token
+      }
+      response = Request.new.post(API_URL, params)
+      new(response)
+    end
   end
 end

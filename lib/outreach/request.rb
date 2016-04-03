@@ -53,6 +53,5 @@ module Outreach
       headers["Authorization"] = "Bearer #{@access_token}" if @access_token
       headers
     end
-
   end
 end

@@ -8,7 +8,7 @@ module Outreach
       # raise error if status code isn't 200
       case status_code.to_i
       when 401
-        raise Unauthorized.new("Unauthorized")
+        raise Unauthorized.new("Authorization failed")
       end
     end
   end
