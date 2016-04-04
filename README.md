@@ -39,7 +39,7 @@ First off you need to grab the authorization key for your user. You do this by g
 
 For example, if using Rails this could be in a view
 ```
-  <%= link_to("Connect to Outreach", Outreach::Authorization.authorization_url)
+  <%= link_to("Connect to Outreach", Outreach::Authorization.authorization_url) %>
 ```
 
 This will take the user through the oauth process - afterwards they will be redirected back to your site to whatever the url you have setup in Outreach.redirect_uri.  This will also provide the authorization key so you can get access for that user using the Outreach::Authorization.create method.
