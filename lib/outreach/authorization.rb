@@ -7,9 +7,9 @@ module Outreach
     attr_reader :token, :refresh_token, :expires_in
 
     def initialize(attrs)
-      @token = attrs[:access_token]
-      @refresh_token = attrs[:refresh_token]
-      @expires_in = attrs[:expires_in]
+      @token = attrs['access_token']
+      @refresh_token = attrs['refresh_token']
+      @expires_in = attrs['expires_in']
     end
 
     def self.authorization_url
@@ -31,7 +31,7 @@ module Outreach
         grant_type:    'authorization_code',
         code:          authorization_code
       }
-      response = Request.new.post(API_URL, params)
+      response = Outreach::Request.new.post(API_URL, params)
       new(response)
     end
 

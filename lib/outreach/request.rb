@@ -31,7 +31,7 @@ module Outreach
     private
 
     def parse_response(response, response_format=:json)
-      check_for_error(response.response.code)
+      check_for_error(response.response.code, response.body)
       display_debug(response.body)
       if response_format == :json
         JSON.parse(response.body.to_s)
