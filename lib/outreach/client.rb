@@ -4,11 +4,9 @@ module Outreach
       @api_token = api_token
     end
 
-    def prospect
-      Outreach::ProspectFinder.new(request)
+    def prospects
+      Outreach::Service::Prospect.new(self)
     end
-
-    private
 
     def request
       Request.new(@api_token)

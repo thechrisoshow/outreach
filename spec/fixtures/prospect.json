@@ -1,0 +1,11 @@
+{ "data":
+{"type":"prospect",
+  "id":296,
+  "attributes":{
+    "company":{"name":"Lexoo"},
+    "contact":{"phone":{"personal":null,"work":null}},
+    "personal":{"name":{"first":"Chris","last":"O'Sullivan"},"title":null},
+    "metadata":{"tags":["SME","coverage","UK"]}
+    }
+  }
+}

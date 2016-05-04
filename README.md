@@ -77,13 +77,13 @@ user.save
 ## API Client
 Once you have the access code for a user you can then create an api client for that user.
 ```ruby
-  client = Outreach::Client.new(user.access_code)
+  outreach = Outreach::Client.new(user.access_code)
 ```
 
 ## Prospects
 To find all prospects:
 ```ruby
-  client.prospects.all
+  outreach.prospects.find_all
   # returns an array of prospects
 ```
 
@@ -94,17 +94,17 @@ Filtering is possible by using the following conditions:
   # email
   # company_name
   # e.g.
-  client.prospects.all({ first_name: "Chris", last_name: "O'Sullivan" })
+  outreach.prospects.find_all({ first_name: "Chris", last_name: "O'Sullivan" })
 ```
 
-The results of client.prospects.all is paginated. You can control pagination by passing in which page you want to see:
+The results of outreach.prospects.find_all is paginated. You can control pagination by passing in which page you want to see:
 ```ruby
-  client.prospects.all({ page: 2 })
+  outreach.prospects.find_all({ page: 2 })
 ```
 
 You can find a specific prospect given the prospect id:
 ```ruby
-  clients.prospect.find(2345)
+  outreach.prospects.find(2345)
 ```
 
 ## Contributing

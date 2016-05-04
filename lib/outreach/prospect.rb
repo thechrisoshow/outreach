@@ -1,6 +1,6 @@
 module Outreach
   class Prospect
-    attr_accessor :first_name, :last_name, :company, :contact, :tags
+    attr_accessor :first_name, :last_name, :company, :contact, :tags, :id
 
     def initialize(attrs)
       @first_name = attrs['attributes']['personal']['name']['first']
@@ -8,6 +8,7 @@ module Outreach
       @company = to_ostruct(attrs['attributes']['company'])
       @contact = to_ostruct(attrs['attributes']['contact'])
       @tags = attrs['attributes']['metadata']['tags']
+      @id = attrs['id']
     end
 
     private
@@ -18,40 +19,6 @@ module Outreach
         o.send(:"#{k}=", to_ostruct(v)) if v.is_a? Hash
       end
       o
-    end
-  end
-
-  class ProspectFinder
-    API_URL =  "https://api.outreach.io/1.0/prospects"
-
-    def initialize(request)
-      @request = request
-    end
-
-    def find(id)
-      response = @request.get("#{API_URL}/#{id}")
-      Prospect.new(response)
-    end
-
-    def all(attrs={})
-      response = @request.get(API_URL, attribute_mapping(attrs))
-      response['data'].map {|attrs| Prospect.new(attrs)}
-    end
-
-    private
-
-    def attribute_mapping(attrs)
-      if attrs[:first_name]
-        attrs["filter[personal/name/first]"] = attrs.delete(:first_name)
-      end
-      if attrs[:last_name]
-        attrs["filter[personal/name/last]"] = attrs.delete(:last_name)
-      end
-      attrs["filter[contact/email]"] = attrs.delete(:email) if attrs[:email]
-      if attrs[:company_name]
-        attrs["filter[company/name]"] = attrs.delete(company_name)
-      end
-      attrs
     end
   end
 end
