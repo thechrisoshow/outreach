@@ -20,7 +20,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install outrach
+    $ gem install outreach
 
 Set your api access with:
 ```ruby
