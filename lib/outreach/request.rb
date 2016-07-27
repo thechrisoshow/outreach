@@ -23,6 +23,12 @@ module Outreach
       parse_response(response, response_format)
     end
 
+    def patch(url, params)
+      response_format = params.delete(:response_format) || :json
+      response = HTTParty.patch(url, body: params.to_json, headers: auth_header)
+      parse_response(response, response_format)
+    end
+
     def delete(url)
       response = HTTParty.delete(url, headers: auth_header)
       parse_response(response)

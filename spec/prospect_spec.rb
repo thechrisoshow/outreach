@@ -33,4 +33,31 @@ describe Outreach::Prospect do
       expect(first_result.id).to eq(296)
     end
   end
+
+  describe 'update' do
+    it 'changes the prospect' do
+      url = "https://api.outreach.io/1.0/prospects/99"
+      stub_request(:patch, url).to_return(body:
+        %Q({
+          "data": {
+            "type": "Prospect",
+            "id": 2763,
+            "attributes": {
+              "created": "2016-05-17T14:47:54.000Z",
+              "updated": "2016-07-27T13:44:01.244Z"
+            }
+          },
+          "meta": {
+            "request": "13f96b87-d682-4b7d-81d5-04d985b92d56"
+          }
+        })
+      )
+
+      client.prospects.update(99, 'email' => 'chris@lexoo.co.uk')
+      assert_requested(:patch, url) do |req|
+        request_body = JSON.parse(req.body)
+        request_body['data']['attributes']['contact']['email'] == 'chris@lexoo.co.uk'
+      end
+    end
+  end
 end
