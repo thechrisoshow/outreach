@@ -13,24 +13,40 @@ module Outreach
     end
 
     def get(url, query={})
-      response = HTTParty.get(url, query: query, headers: auth_header)
+      attrs = {
+        query: query, headers: auth_header
+      }
+      attrs[:debug_output] = $stdout if Outreach.debug
+      response = HTTParty.get(url, attrs)
       parse_response(response)
     end
 
     def post(url, params)
       response_format = params.delete(:response_format) || :json
-      response = HTTParty.post(url, body: params.to_json, headers: auth_header)
+      attrs = {
+        body: params.to_json, headers: auth_header
+      }
+      attrs[:debug_output] = $stdout if Outreach.debug
+      response = HTTParty.post(url, attrs)
       parse_response(response, response_format)
     end
 
     def patch(url, params)
       response_format = params.delete(:response_format) || :json
-      response = HTTParty.patch(url, body: params.to_json, headers: auth_header)
+      attrs = {
+        body: params.to_json, headers: auth_header
+      }
+      attrs[:debug_output] = $stdout if Outreach.debug
+      response = HTTParty.patch(url, attrs)
       parse_response(response, response_format)
     end
 
     def delete(url)
-      response = HTTParty.delete(url, headers: auth_header)
+      attrs = {
+        headers: auth_header
+      }
+      attrs[:debug_output] = $stdout if Outreach.debug
+      response = HTTParty.delete(url, attrs)
       parse_response(response)
     end
 
