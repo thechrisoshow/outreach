@@ -25,7 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "byebug"
 
   spec.add_dependency "httparty", "~> 0.14"
-  spec.required_rubygems_version = ">= 2.4.0"
-  spec.add_dependency "json", "~> 2.0"
+  spec.add_dependency "json", ">= 1.8", "< 3"
 
 end
