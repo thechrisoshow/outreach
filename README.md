@@ -107,6 +107,9 @@ You can find a specific prospect given the prospect id:
   outreach.prospects.find(2345)
 ```
 
+## Ruby versions older than 2.4
+Install the 0.1.3 version
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/outreach/fork )
