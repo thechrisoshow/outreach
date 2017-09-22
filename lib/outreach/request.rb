@@ -71,7 +71,7 @@ module Outreach
     end
 
     def auth_header
-      headers = { 'Content-Type' => 'application/json' }
+      headers = { 'Content-Type' => 'application/vnd.api+json' }
       headers["Authorization"] = "Bearer #{@access_token}" if @access_token
       headers
     end
